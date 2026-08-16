@@ -1,22 +1,22 @@
 """FLOW — paquete principal, re-exporta API de core."""
 from .core import (
-    FlowVM,
     FlowConfig,
+    FlowVM,
     Particle,
     exec_instruction,
-    sample_bilinear,
-    sample_vec,
     make_hello_flow,
     make_vortex,
+    sample_bilinear,
+    sample_vec,
 )
 
 __all__ = [
-    "FlowVM",
     "FlowConfig",
+    "FlowVM",
     "Particle",
     "exec_instruction",
-    "sample_bilinear",
-    "sample_vec",
     "make_hello_flow",
     "make_vortex",
+    "sample_bilinear",
+    "sample_vec",
 ]

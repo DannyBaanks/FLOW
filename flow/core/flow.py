@@ -5,16 +5,15 @@ Minimal image-as-vector-field esolang.
 """
 
 from __future__ import annotations
-import sys
-import random
+
 import math
+import random
+import sys
 from dataclasses import dataclass, field
-from typing import List, Tuple, Optional
-from pathlib import Path
 
 try:
-    from PIL import Image
     import numpy as np
+    from PIL import Image
 except ImportError:
     print("Requiere: pip install pillow numpy", file=sys.stderr)
     sys.exit(1)
@@ -42,7 +41,7 @@ def sample_bilinear(field: np.ndarray, x: float, y: float) -> float:
             v11 * dx * dy)
 
 
-def sample_vec(field_r: np.ndarray, field_g: np.ndarray, x: float, y: float) -> Tuple[float, float]:
+def sample_vec(field_r: np.ndarray, field_g: np.ndarray, x: float, y: float) -> tuple[float, float]:
     """Muestrea vector (vx, vy) en (x,y). R,G ∈ [0,255] -> [-1,1]."""
     vx = (sample_bilinear(field_r, x, y) / 127.5) - 1.0
     vy = (sample_bilinear(field_g, x, y) / 127.5) - 1.0
@@ -60,11 +59,11 @@ class Particle:
     vx: float = 0.0
     vy: float = 0.0
     state: int = 0
-    stack: List[int] = field(default_factory=list)
+    stack: list[int] = field(default_factory=list)
     alive: bool = True
     pid: int = 0
 
-    def pos(self) -> Tuple[float, float]:
+    def pos(self) -> tuple[float, float]:
         return (self.x, self.y)
 
 
@@ -79,7 +78,7 @@ def exec_instruction(
     p: Particle,
     field_b: np.ndarray,
     field_trace: np.ndarray,
-    particles: List[Particle],
+    particles: list[Particle],
     pid_counter: int,
     w: int, h: int,
     rng=None
@@ -213,11 +212,11 @@ class FlowConfig:
     damping: float = 0.9
     field_gain: float = 0.1
     trace_enabled: bool = True
-    seed: Optional[int] = None  # None = RAND no determinista (legacy); int = determinista
+    seed: int | None = None  # None = RAND no determinista (legacy); int = determinista
 
 
 class FlowVM:
-    def __init__(self, image_path: str, config: Optional[FlowConfig] = None):
+    def __init__(self, image_path: str, config: FlowConfig | None = None):
         self.config = config or FlowConfig()
         img = Image.open(image_path).convert("RGB")
         self.w, self.h = img.size
@@ -226,10 +225,10 @@ class FlowVM:
         self.field_g = arr[:, :, 1]  # G = vy
         self.field_b = arr[:, :, 2].copy().astype(np.uint8)  # B = scalar (mutable)
         self.field_trace = np.zeros((self.h, self.w), dtype=np.uint8)
-        self.particles: List[Particle] = []
+        self.particles: list[Particle] = []
         self.tick = 0
         self.pid_counter = 0
-        self.log: List[Tuple] = []
+        self.log: list[tuple] = []
         # RNG determinista para RAND (instr 22). seed=None -> entropia del OS.
         self.rng = random.Random(self.config.seed)
         self._spawn_initial()

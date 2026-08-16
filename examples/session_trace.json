@@ -1,0 +1,1123 @@
+{
+  "metadata": {
+    "engine": "FLOW",
+    "engine_version": "flow-0.1+trace-1",
+    "program_sha256": "2fa5405fbdad407a4ee7a19584ec2b94b2b6ef2f1d0a713b437d333972797ce4",
+    "seed": 7,
+    "config": {
+      "max_ticks": 10000,
+      "dt": 1.0,
+      "damping": 0.9,
+      "field_gain": 0.1,
+      "trace_enabled": true,
+      "image_size": [
+        64,
+        64
+      ]
+    },
+    "ticks": 9,
+    "particles_spawned": 8,
+    "final_alive": 0,
+    "execution_order_rule": "SPLIT appends to particles during the tick loop; a child MAY execute in the same tick N (current VM semantics)"
+  },
+  "ticks": [
+    {
+      "tick": 0,
+      "alive_before": 8,
+      "alive_after": 8,
+      "total_particles": 8
+    },
+    {
+      "tick": 1,
+      "alive_before": 8,
+      "alive_after": 8,
+      "total_particles": 8
+    },
+    {
+      "tick": 2,
+      "alive_before": 8,
+      "alive_after": 8,
+      "total_particles": 8
+    },
+    {
+      "tick": 3,
+      "alive_before": 8,
+      "alive_after": 7,
+      "total_particles": 8
+    },
+    {
+      "tick": 4,
+      "alive_before": 7,
+      "alive_after": 4,
+      "total_particles": 8
+    },
+    {
+      "tick": 5,
+      "alive_before": 4,
+      "alive_after": 4,
+      "total_particles": 8
+    },
+    {
+      "tick": 6,
+      "alive_before": 4,
+      "alive_after": 1,
+      "total_particles": 8
+    },
+    {
+      "tick": 7,
+      "alive_before": 1,
+      "alive_after": 0,
+      "total_particles": 8
+    },
+    {
+      "tick": 8,
+      "alive_before": 0,
+      "alive_after": 0,
+      "total_particles": 8
+    }
+  ],
+  "events": [
+    {
+      "tick": 0,
+      "pid": 0,
+      "type": "PARTICLE_SPAWN",
+      "payload": {
+        "x": 29.5,
+        "y": 29.5,
+        "src": "marker"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 1,
+      "type": "PARTICLE_SPAWN",
+      "payload": {
+        "x": 32.5,
+        "y": 29.5,
+        "src": "marker"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 2,
+      "type": "PARTICLE_SPAWN",
+      "payload": {
+        "x": 34.5,
+        "y": 29.5,
+        "src": "marker"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 3,
+      "type": "PARTICLE_SPAWN",
+      "payload": {
+        "x": 29.5,
+        "y": 32.5,
+        "src": "marker"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 4,
+      "type": "PARTICLE_SPAWN",
+      "payload": {
+        "x": 35.5,
+        "y": 32.5,
+        "src": "marker"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 5,
+      "type": "PARTICLE_SPAWN",
+      "payload": {
+        "x": 29.5,
+        "y": 34.5,
+        "src": "marker"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 6,
+      "type": "PARTICLE_SPAWN",
+      "payload": {
+        "x": 34.5,
+        "y": 34.5,
+        "src": "marker"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 7,
+      "type": "PARTICLE_SPAWN",
+      "payload": {
+        "x": 32.5,
+        "y": 35.5,
+        "src": "marker"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 0,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 64,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 1,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 64,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 2,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 64,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 3,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 64,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 4,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 64,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 5,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 64,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 6,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 64,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 7,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 64,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 0,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.5,
+        "y_from": 29.5,
+        "x_to": 29.569607843137256,
+        "y_to": 29.429607843137255
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 1,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 32.5,
+        "y_from": 29.5,
+        "x_to": 32.595882352941175,
+        "y_to": 29.518627450980393
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 2,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 34.5,
+        "y_from": 29.5,
+        "x_to": 34.5664705882353,
+        "y_to": 29.573333333333334
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 3,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.5,
+        "y_from": 32.5,
+        "x_to": 29.480588235294118,
+        "y_to": 32.40372549019608
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 4,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 35.5,
+        "y_from": 32.5,
+        "x_to": 35.4856862745098,
+        "y_to": 32.597843137254905
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 5,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.5,
+        "y_from": 34.5,
+        "x_to": 29.425882352941176,
+        "y_to": 34.43274509803921
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 6,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 34.5,
+        "y_from": 34.5,
+        "x_to": 34.429607843137255,
+        "y_to": 34.569607843137256
+      }
+    },
+    {
+      "tick": 0,
+      "pid": 7,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 32.5,
+        "y_from": 35.5,
+        "x_to": 32.40176470588235,
+        "y_to": 35.51352941176471
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 0,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 63,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 1,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 50,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 2,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 47,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 3,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 79,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 4,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 53,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 5,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 83,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 6,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 63,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 7,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 74,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 0,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.569607843137256,
+        "y_from": 29.429607843137255,
+        "x_to": 29.70377278467558,
+        "y_to": 29.297795842775404
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 1,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 32.595882352941175,
+        "y_from": 29.518627450980393,
+        "x_to": 32.777208264242255,
+        "y_to": 29.557814894271434
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 2,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 34.5664705882353,
+        "y_from": 29.573333333333334,
+        "x_to": 34.69165038985006,
+        "y_to": 29.713605038062283
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 3,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.480588235294118,
+        "y_from": 32.40372549019608,
+        "x_to": 29.44747258285275,
+        "y_to": 32.22004355528417
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 4,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 35.4856862745098,
+        "y_from": 32.597843137254905,
+        "x_to": 35.455705531266254,
+        "y_to": 32.78330289463329
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 5,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.425882352941176,
+        "y_from": 34.43274509803921,
+        "x_to": 29.28588331293394,
+        "y_to": 34.303981703145844
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 6,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 34.429607843137255,
+        "y_from": 34.569607843137256,
+        "x_to": 34.2939527055205,
+        "y_to": 34.699929647420674
+      }
+    },
+    {
+      "tick": 1,
+      "pid": 7,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 32.40176470588235,
+        "y_from": 35.51352941176471,
+        "x_to": 32.21475814451455,
+        "y_to": 35.53646174611575
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 0,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 53,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 1,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 25,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 2,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 23,
+        "mnemonic": "COLOR"
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 3,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 110,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 4,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 30,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 5,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 127,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 6,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 54,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 7,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 93,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 0,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.70377278467558,
+        "y_from": 29.297795842775404,
+        "x_to": 29.899604357840996,
+        "y_to": 29.11444206801509
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 1,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 32.777208264242255,
+        "y_from": 29.557814894271434,
+        "x_to": 33.033754348123104,
+        "y_to": 29.622854952015615
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 2,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 34.69165038985006,
+        "y_from": 29.713605038062283,
+        "x_to": 34.867153200438466,
+        "y_to": 29.91623941015708
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 3,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.44747258285275,
+        "y_from": 32.22004355528417,
+        "x_to": 29.4090601654612,
+        "y_to": 31.95630589663825
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 4,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 35.455705531266254,
+        "y_from": 32.78330289463329,
+        "x_to": 35.40627618263752,
+        "y_to": 33.04675608499759
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 5,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.28588331293394,
+        "y_from": 34.303981703145844,
+        "x_to": 29.087813233600475,
+        "y_to": 34.11840928509943
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 6,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 34.2939527055205,
+        "y_from": 34.699929647420674,
+        "x_to": 34.095995621591356,
+        "y_to": 34.88115795255256
+      }
+    },
+    {
+      "tick": 2,
+      "pid": 7,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 32.21475814451455,
+        "y_from": 35.53646174611575,
+        "x_to": 31.947191784600776,
+        "y_to": 35.56263295684956
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 0,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 23,
+        "mnemonic": "COLOR"
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 1,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 3,
+        "mnemonic": "DEC"
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 2,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 3,
+        "mnemonic": "DEC"
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 3,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 144,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 4,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 0,
+        "mnemonic": "HALT"
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 5,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 205,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 6,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 27,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 7,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 106,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 0,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.899604357840996,
+        "y_from": 29.11444206801509,
+        "x_to": 30.15587483500947,
+        "y_to": 28.89017077030839
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 1,
+      "type": "STATE_CHANGE",
+      "payload": {
+        "from": 0,
+        "to": 255
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 1,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 33.033754348123104,
+        "y_from": 29.622854952015615,
+        "x_to": 33.355030763995664,
+        "y_to": 29.72171950792377
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 2,
+      "type": "STATE_CHANGE",
+      "payload": {
+        "from": 0,
+        "to": 255
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 2,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 34.867153200438466,
+        "y_from": 29.91623941015708,
+        "x_to": 35.08346190345758,
+        "y_to": 30.178776869740567
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 3,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.4090601654612,
+        "y_from": 31.95630589663825,
+        "x_to": 29.37570594190765,
+        "y_to": 31.619245752280627
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 4,
+      "type": "PARTICLE_DEATH",
+      "payload": {
+        "x": 35.40627618263752,
+        "y": 33.04675608499759
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 5,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.087813233600475,
+        "y_from": 34.11840928509943,
+        "x_to": 28.838439286564743,
+        "y_to": 33.88056866583182
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 6,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 34.095995621591356,
+        "y_from": 34.88115795255256,
+        "x_to": 33.837027679508665,
+        "y_to": 35.102732204240354
+      }
+    },
+    {
+      "tick": 3,
+      "pid": 7,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 31.947191784600776,
+        "y_from": 35.56263295684956,
+        "x_to": 31.606560660180552,
+        "y_to": 35.5843478905613
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 0,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 0,
+        "mnemonic": "HALT"
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 1,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 25,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 2,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 0,
+        "mnemonic": "HALT"
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 3,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 99,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 5,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 188,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 6,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 0,
+        "mnemonic": "HALT"
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 7,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 64,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 0,
+      "type": "PARTICLE_DEATH",
+      "payload": {
+        "x": 30.15587483500947,
+        "y": 28.89017077030839
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 1,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 33.355030763995664,
+        "y_from": 29.72171950792377,
+        "x_to": 33.72750160742503,
+        "y_to": 29.861807267185092
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 2,
+      "type": "PARTICLE_DEATH",
+      "payload": {
+        "x": 35.08346190345758,
+        "y": 30.178776869740567
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 3,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.37570594190765,
+        "y_from": 31.619245752280627,
+        "x_to": 29.359147570258042,
+        "y_to": 31.218468788569933
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 5,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 28.838439286564743,
+        "y_from": 33.88056866583182,
+        "x_to": 28.55152428746745,
+        "y_to": 33.58990455959762
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 6,
+      "type": "PARTICLE_DEATH",
+      "payload": {
+        "x": 33.837027679508665,
+        "y": 35.102732204240354
+      }
+    },
+    {
+      "tick": 4,
+      "pid": 7,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 31.606560660180552,
+        "y_from": 35.5843478905613,
+        "x_to": 31.20130317345259,
+        "y_to": 35.5927788410523
+      }
+    },
+    {
+      "tick": 5,
+      "pid": 1,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 26,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 5,
+      "pid": 3,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 36,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 5,
+      "pid": 5,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 83,
+        "mnemonic": "NOP"
+      }
+    },
+    {
+      "tick": 5,
+      "pid": 7,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 21,
+        "mnemonic": "LT"
+      }
+    },
+    {
+      "tick": 5,
+      "pid": 1,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 33.72750160742503,
+        "y_from": 29.861807267185092,
+        "x_to": 34.13825757239751,
+        "y_to": 30.05052733207836
+      }
+    },
+    {
+      "tick": 5,
+      "pid": 3,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 29.359147570258042,
+        "y_from": 31.218468788569933,
+        "x_to": 29.372113972293807,
+        "y_to": 30.762988331048536
+      }
+    },
+    {
+      "tick": 5,
+      "pid": 5,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 28.55152428746745,
+        "y_from": 33.58990455959762,
+        "x_to": 28.246548193972057,
+        "y_to": 33.24194286319344
+      }
+    },
+    {
+      "tick": 5,
+      "pid": 7,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 31.20130317345259,
+        "y_from": 35.5927788410523,
+        "x_to": 30.739216007336015,
+        "y_to": 35.57825938837721
+      }
+    },
+    {
+      "tick": 6,
+      "pid": 1,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 0,
+        "mnemonic": "HALT"
+      }
+    },
+    {
+      "tick": 6,
+      "pid": 3,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 0,
+        "mnemonic": "HALT"
+      }
+    },
+    {
+      "tick": 6,
+      "pid": 5,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 15,
+        "mnemonic": "ADD"
+      }
+    },
+    {
+      "tick": 6,
+      "pid": 7,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 0,
+        "mnemonic": "HALT"
+      }
+    },
+    {
+      "tick": 6,
+      "pid": 1,
+      "type": "PARTICLE_DEATH",
+      "payload": {
+        "x": 34.13825757239751,
+        "y": 30.05052733207836
+      }
+    },
+    {
+      "tick": 6,
+      "pid": 3,
+      "type": "PARTICLE_DEATH",
+      "payload": {
+        "x": 29.372113972293807,
+        "y": 30.762988331048536
+      }
+    },
+    {
+      "tick": 6,
+      "pid": 5,
+      "type": "PARTICLE_MOVE",
+      "payload": {
+        "x_from": 28.246548193972057,
+        "y_from": 33.24194286319344,
+        "x_to": 27.939566916091355,
+        "y_to": 32.8345904621623
+      }
+    },
+    {
+      "tick": 6,
+      "pid": 7,
+      "type": "PARTICLE_DEATH",
+      "payload": {
+        "x": 30.739216007336015,
+        "y": 35.57825938837721
+      }
+    },
+    {
+      "tick": 7,
+      "pid": 5,
+      "type": "INSTRUCTION_EXECUTED",
+      "payload": {
+        "instr": 0,
+        "mnemonic": "HALT"
+      }
+    },
+    {
+      "tick": 7,
+      "pid": 5,
+      "type": "PARTICLE_DEATH",
+      "payload": {
+        "x": 27.939566916091355,
+        "y": 32.8345904621623
+      }
+    }
+  ]
+}

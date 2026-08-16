@@ -1,10 +1,11 @@
 """FLOW CLI — comandos deterministas."""
 from .flow_cli import (
-    main,
-    cmd_run,
-    cmd_replay,
     cmd_diff,
+    cmd_render,
+    cmd_replay,
+    cmd_run,
     cmd_validate,
+    main,
 )
 
-__all__ = ["main", "cmd_run", "cmd_replay", "cmd_diff", "cmd_validate"]
+__all__ = ["cmd_diff", "cmd_render", "cmd_replay", "cmd_run", "cmd_validate", "main"]

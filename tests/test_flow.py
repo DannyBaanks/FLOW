@@ -1,14 +1,14 @@
 """Tests para FLOW v0.1"""
 
-import tempfile
-import os
-from pathlib import Path
 import sys
+import tempfile
+from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from flow.core import FlowVM, FlowConfig, make_hello_flow, make_vortex
-from PIL import Image
 import numpy as np
+
+from flow.core import FlowConfig, FlowVM, make_hello_flow, make_vortex
 
 
 def test_hello_flow_runs():
@@ -55,8 +55,9 @@ def test_vector_sampling():
 
 def test_instruction_inc():
     """INC incrementa state."""
-    from flow import Particle, exec_instruction
     import numpy as np
+
+    from flow import Particle, exec_instruction
     p = Particle(x=0.5, y=0.5, state=5)
     field_b = np.zeros((10, 10), dtype=np.uint8)
     field_trace = np.zeros((10, 10), dtype=np.uint8)
@@ -67,8 +68,9 @@ def test_instruction_inc():
 
 def test_instruction_split_creates_child():
     """SPLIT crea partícula hija."""
-    from flow import Particle, exec_instruction
     import numpy as np
+
+    from flow import Particle, exec_instruction
     p = Particle(x=10.0, y=10.0, vx=1.0, vy=0.0, state=42)
     field_b = np.zeros((20, 20), dtype=np.uint8)
     field_trace = np.zeros((20, 20), dtype=np.uint8)

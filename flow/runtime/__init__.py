@@ -1,18 +1,18 @@
 """FLOW runtime — ExecutionTrace."""
 from .flow_trace import (
-    ExecutionTrace,
     Event,
-    run_program,
-    program_hash,
+    ExecutionTrace,
     canonical_projection,
+    program_hash,
+    run_program,
     trace_diff,
 )
 
 __all__ = [
-    "ExecutionTrace",
     "Event",
-    "run_program",
-    "program_hash",
+    "ExecutionTrace",
     "canonical_projection",
+    "program_hash",
+    "run_program",
     "trace_diff",
 ]

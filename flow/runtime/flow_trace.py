@@ -16,10 +16,9 @@ from __future__ import annotations
 
 import hashlib
 import json
-import math
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 
@@ -81,8 +80,8 @@ def _snap_all(ps: list[flow_core.Particle]) -> dict[int, dict[str, Any]]:
 
 
 def run_program(image_path: str | Path,
-                config: Optional[flow_core.FlowConfig] = None,
-                seed: Optional[int] = None) -> ExecutionTrace:
+                config: flow_core.FlowConfig | None = None,
+                seed: int | None = None) -> ExecutionTrace:
     """Ejecuta la VM real y devuelve un ExecutionTrace observado."""
     cfg = config or flow_core.FlowConfig()
     if seed is not None:
@@ -157,7 +156,7 @@ def run_program(image_path: str | Path,
                                   "parent_hint": s_before and "present"}).to_dict())
 
         # FIELD_WRITE / TRACE (diff del campo)
-        bdiff = np.argwhere((vm.field_b != field_b_before))
+        bdiff = np.argwhere(vm.field_b != field_b_before)
         if bdiff.size:
             # limitar a algunos puntos representativos (los WRITE/COLOR son puntuales)
             for (y, x) in bdiff[:32]:
@@ -166,7 +165,7 @@ def run_program(image_path: str | Path,
                                     "FIELD_WRITE",
                                     {"x": int(x), "y": int(y),
                                      "value": int(vm.field_b[y, x])}).to_dict())
-        tdiff = np.argwhere((vm.field_trace != trace_before))
+        tdiff = np.argwhere(vm.field_trace != trace_before)
         if tdiff.size:
             for (y, x) in tdiff[:32]:
                 events.append(Event(tick_after - 1, -1, "PARTICLE_TRACE",

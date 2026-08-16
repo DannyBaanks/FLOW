@@ -11,18 +11,17 @@ Pruebas:
 """
 from __future__ import annotations
 
-import tempfile
 import json
-from pathlib import Path
 import sys
+import tempfile
+from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from PIL import Image
 
 import flow.core as flow_core
 import flow.runtime as flow_trace
-import flow.cli as flow_cli
-from flow import FlowVM, FlowConfig, Particle, exec_instruction
-from PIL import Image
-import numpy as np
 
 
 def _make_rand_program(path: str):
@@ -154,8 +153,9 @@ def test_cli_run_replay_diff_validate():
         prog = Path(tmp) / "hello.png"
         flow_core.make_hello_flow(str(prog))
         # flow run
-        from flow.cli import cmd_run
         import argparse
+
+        from flow.cli import cmd_run
         args = argparse.Namespace(image=str(prog), max_ticks=200, seed=11,
                                    trace=str(Path(tmp) / "cli_trace.json"),
                                    output=None)

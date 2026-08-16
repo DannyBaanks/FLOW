@@ -9,14 +9,14 @@ Subcomandos:
   (render sera M2)
 """
 from __future__ import annotations
+
 import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Optional
 
 import flow.core as flow_core
-import flow.runtime.flow_trace as flow_trace
+from flow.runtime import flow_trace
 
 ENGINE_VERSION = "flow-0.1+cli-1"
 
@@ -34,7 +34,7 @@ def _save_outputs(vm: flow_core.FlowVM, out_prefix: str):
 
 
 def cmd_run(args: argparse.Namespace) -> int:
-    from flow import FlowVM, FlowConfig  # lazy import
+    from flow import FlowConfig, FlowVM  # lazy import
 
     config = FlowConfig(max_ticks=args.max_ticks)
     seed = args.seed
@@ -81,7 +81,7 @@ def cmd_replay(args: argparse.Namespace) -> int:
         trace_orig_data = json.load(f)
     diff = flow_trace.trace_diff(trace_orig_data, trace2)
     if diff["verdict"] == "identical":
-        print(f"REPLAY OK — trace idéntico al original")
+        print("REPLAY OK — trace idéntico al original")
         return 0
     else:
         print(f"REPLAY DIFERENTE — {json.dumps(diff, indent=2)}")
@@ -122,6 +122,40 @@ def cmd_validate(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_render(args: argparse.Namespace) -> int:
+    """Render image/GIF/session from a trace (M2). Trace-only: never re-runs the VM."""
+    from flow.render import render_gif, render_image, render_session_gif
+
+    if args.format == "session":
+        out = Path(args.output).with_suffix(".gif")
+        render_session_gif(
+            args.trace,
+            out,
+            program_name=args.program,
+            layout=args.layout,
+            scale=args.scale,
+            max_frames=args.max_frames,
+            duration_ms=args.duration,
+        )
+        print(f"Session GIF -> {out}")
+    elif args.format == "gif":
+        out = Path(args.output).with_suffix(".gif")
+        render_gif(
+            args.trace,
+            out,
+            layout=args.layout,
+            scale=args.scale,
+            max_frames=args.max_frames,
+            duration_ms=args.duration,
+        )
+        print(f"GIF -> {out}")
+    else:
+        out = Path(args.output).with_suffix(".png")
+        render_image(args.trace, out, layout=args.layout, scale=args.scale)
+        print(f"PNG -> {out}")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(prog="flow", description="FLOW deterministic runner")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -153,6 +187,18 @@ def main() -> int:
     p_val = sub.add_parser("validate", help="Valida schema de trace.json")
     p_val.add_argument("trace")
     p_val.set_defaults(func=cmd_validate)
+
+    # render (M2)
+    p_render = sub.add_parser("render", help="Renderiza image/gif/session desde un trace (M2)")
+    p_render.add_argument("trace", help="trace.json existente (nunca re-ejecuta la VM)")
+    p_render.add_argument("--format", choices=["image", "gif", "session"], default="image")
+    p_render.add_argument("--layout", choices=["arena", "split"], default="arena")
+    p_render.add_argument("--scale", type=int, default=6)
+    p_render.add_argument("--duration", type=int, default=85, help="ms por frame (gif/session)")
+    p_render.add_argument("--max-frames", type=int, default=220, help="frames max (gif/session)")
+    p_render.add_argument("--program", default="vortex.png", help="nombre del programa (solo session)")
+    p_render.add_argument("--output", "-o", default="flow_render", help="Ruta salida")
+    p_render.set_defaults(func=cmd_render)
 
     args = parser.parse_args()
     return args.func(args)
