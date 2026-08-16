@@ -1,0 +1,14 @@
+# FLOW artifacts
+runs/
+*.trace.json
+*.replay.json
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Generated examples (optional - uncomment if you want to keep them)
+# examples/*_out*
+# examples/*.png

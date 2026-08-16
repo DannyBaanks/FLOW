@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flow"
+version = "0.1.0"
+description = "FLOW — Image-as-Vector-Field Esolang VM with deterministic execution trace"
+requires-python = ">=3.10"
+dependencies = [
+    "pillow>=10",
+    "numpy>=1.24",
+]
+
+[project.scripts]
+flow = "flow.cli.flow_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra -q"
+
+[tool.ruff]
+line-length = 100

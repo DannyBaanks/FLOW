@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: flow
+Version: 0.1.0
+Summary: FLOW — Image-as-Vector-Field Esolang VM with deterministic execution trace
+Requires-Python: >=3.10
+Requires-Dist: pillow>=10
+Requires-Dist: numpy>=1.24
