@@ -1,5 +1,7 @@
 # FLOW
 
+![FLOW vortex demo](vortex.gif)
+
 **FLOW v0.1** — Image-as-Vector-Field Esolang VM.
 
 El programa **ES una imagen** (PNG). Los canales R/G codifican un campo vectorial
@@ -75,3 +77,11 @@ flow.render    # (M2: image/gif renderers consumen ExecutionTrace)
 ## License
 
 Dominio público / CC0.
+
+---
+
+### FlowGen → FLOW pipeline demo
+
+![FlowGen visualizing FLOW, rendered by FLOW](flow-gif.gif)
+
+*Pipeline: `flowgen visualize FLOW → program.flow → execution.trace.json → flow render --format gif`*
