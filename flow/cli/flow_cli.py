@@ -123,9 +123,34 @@ def cmd_validate(args: argparse.Namespace) -> int:
 
 
 def cmd_render(args: argparse.Namespace) -> int:
-    """Render image/GIF/session from a trace (M2). Trace-only: never re-runs the VM."""
-    from flow.render import render_gif, render_image, render_session_gif
+    """Render image/GIF/session from a trace (M2+M3). Trace-only: never re-runs the VM.
 
+    When --profile is given, uses the multi-projection renderer (FASE 3).
+    Otherwise falls back to legacy --format behavior (backward compatible).
+    """
+    from flow.render import render_gif, render_image, render_session_gif
+    from flow.render.spec import RenderSpec
+    from flow.render.profiles import render_profile
+
+    # ── new: profile-based rendering (FASE 3) ────────────────────
+    if args.profile:
+        spec: RenderSpec
+        if args.spec:
+            spec = RenderSpec.load(args.spec)
+            if spec.profile != args.profile:
+                print(f"WARN: spec profile {spec.profile!r} overrides --profile {args.profile!r}")
+        else:
+            spec = RenderSpec.default(args.profile)
+        # allow CLI overrides
+        spec.scale = args.scale
+        spec.duration_ms = args.duration
+        spec.max_frames = args.max_frames
+        out = Path(args.output).with_suffix(".gif")
+        render_profile(args.trace, out, spec, program_name=args.program)
+        print(f"Profile {args.profile} -> {out}")
+        return 0
+
+    # ── legacy: format-based rendering (unchanged, backward compat)
     if args.format == "session":
         out = Path(args.output).with_suffix(".gif")
         render_session_gif(
@@ -188,10 +213,17 @@ def main() -> int:
     p_val.add_argument("trace")
     p_val.set_defaults(func=cmd_validate)
 
-    # render (M2)
-    p_render = sub.add_parser("render", help="Renderiza image/gif/session desde un trace (M2)")
+    # render (M2 + M3 multi-projection)
+    from flow.render.spec import PROFILES
+    p_render = sub.add_parser("render",
+        help="Renderiza image/gif/session desde un trace (M2) o profile (M3)")
     p_render.add_argument("trace", help="trace.json existente (nunca re-ejecuta la VM)")
-    p_render.add_argument("--format", choices=["image", "gif", "session"], default="image")
+    p_render.add_argument("--format", choices=["image", "gif", "session"], default="image",
+        help="Legacy format (ignored when --profile is set)")
+    p_render.add_argument("--profile", choices=list(PROFILES), default=None,
+        help="Multi-projection profile: debug trails heatmap graph orbit story cinematic")
+    p_render.add_argument("--spec", default=None,
+        help="Path to render-spec.json (required for story, optional for others)")
     p_render.add_argument("--layout", choices=["arena", "split"], default="arena")
     p_render.add_argument("--scale", type=int, default=6)
     p_render.add_argument("--duration", type=int, default=85, help="ms por frame (gif/session)")

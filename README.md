@@ -33,12 +33,51 @@ flow trace-diff trace.json trace_replay.json
 flow validate trace.json
 ```
 
+## Multiple views, one execution
+
+FLOW separates what happened from how it is shown.
+
+```
+program.png → FlowVM → ExecutionTrace.json → renderer profile → GIF
+```
+
+The VM runs once. The trace is saved. Then you render it as many ways
+as you like, each time producing a different **visual projection** of
+the same execution.
+
+```bash
+# Same trace, different views
+flow render trace.json --profile debug     --output debug.gif
+flow render trace.json --profile trails    --output trails.gif
+flow render trace.json --profile heatmap   --output heatmap.gif
+flow render trace.json --profile graph     --output graph.gif
+flow render trace.json --profile orbit     --output orbit.gif
+flow render trace.json --profile cinematic --output cinematic.gif
+
+# Story mode requires a render-spec.json
+flow render trace.json --profile story --spec render-spec.json --output story.gif
+```
+
+**Canonical invariant:** `TRACE != VIEW`. Both GIFs come from the same
+ExecutionTrace. Rendering never re-executes the VM.
+
+| Profile | Description |
+|---------|-------------|
+| `debug` | Original arena view (evidence / inspection) |
+| `trails` | Fading trail segments + event pulses + interpolation |
+| `heatmap` | Accumulated cell activity from real events |
+| `graph` | Event type transition graph, circle layout |
+| `orbit` | Abstract entity layout with event pulses |
+| `story` | Spec-driven labeled entities + caption bar |
+| `cinematic` | Glow + interpolation + trails + persistence |
+
 ## Determinismo
 
 - `--seed` controla `RAND` (instr 22). Mismo programa + misma seed = trace **idéntico**.
 - Sin `RAND` ejecutado: distintas seeds producen trace **idéntico**.
 - Con `RAND` ejecutado: distintas seeds producen traces **diferentes**.
 - `replay` re-ejecuta y compara con `trace-diff` (proyección semántica: seed excluida).
+- **Render determinism:** same trace + same profile + same spec → same GIF bytes (`BYTE_DETERMINISTIC`).
 
 ## Salidas legacy (opcionales)
 
@@ -53,7 +92,7 @@ flow validate trace.json
 python -m pytest tests/ -v
 ```
 
-16 tests: 8 unitarios del VM original + 8 de determinismo M1 (trace, replay, diff, validate).
+42 tests: 8 unitarios del VM + 8 de determinismo M1 + 8 de render M2 + 18 de perfiles M3.
 
 ## Ejemplos incluidos
 
@@ -69,9 +108,11 @@ flow.core      # VM pura (FlowVM, Particle, instrucciones)
     ↓
 flow.runtime   # ExecutionTrace (observación pura, sin re-ejecutar lógica)
     ↓
-flow.cli       # run / replay / trace-diff / validate
+flow.cli       # run / replay / trace-diff / validate / render
     ↓
-flow.render    # (M2: image/gif renderers consumen ExecutionTrace)
+flow.render    # M2: image/gif/session renderers
+               # M3: profiles (debug/trails/heatmap/graph/orbit/story/cinematic)
+                   consume ExecutionTrace + RenderSpec → frames → GIF
 ```
 
 ## License

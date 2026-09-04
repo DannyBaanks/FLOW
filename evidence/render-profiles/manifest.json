@@ -1,0 +1,34 @@
+{
+    "profiles":  {
+                     "story":  {
+                                   "file_size_bytes":  34270,
+                                   "output_sha256":  "B1D2DF23C14625B3472067F80A161BD6192C0C6FD80CDDFB2C88201CDD49D1C6"
+                               },
+                     "trails":  {
+                                    "file_size_bytes":  49156,
+                                    "output_sha256":  "05BC7A8F3D1A31947327EB76EC77A4D01AB88B42256A6ED96394422BE5DE3F18"
+                                },
+                     "debug":  {
+                                   "file_size_bytes":  4316,
+                                   "output_sha256":  "120233A49165AACE531A49C094D43B81A676ADA7F0B187384728206E4B04A52D"
+                               },
+                     "heatmap":  {
+                                     "file_size_bytes":  32149,
+                                     "output_sha256":  "A19E0F2A570771EBBDDB5870456CF9D292153A2A72D215B3A02FE25A364B38A6"
+                                 },
+                     "cinematic":  {
+                                       "file_size_bytes":  26032,
+                                       "output_sha256":  "96D3CE440E5496C64F011B34D7CBB8FA4C74EC9CCC671812076E2E59B20003D8"
+                                   },
+                     "graph":  {
+                                   "file_size_bytes":  65948,
+                                   "output_sha256":  "2CE70BCE5164466C8008A5072AD0AF2879295D6E33C7242EDBCE2A7936E378AC"
+                               },
+                     "orbit":  {
+                                   "file_size_bytes":  76384,
+                                   "output_sha256":  "725A4548B419AB01352F8E78BF7E9B9BCA0A1B64DC470319A8716FE2601F77F3"
+                               }
+                 },
+    "render_spec_sha256":  "16A43281FF1FCECC7102C4F3C49EEC9BA0B295F6745414152277F9DE85832FCE",
+    "trace_sha256":  "9E00FA881B234C9F5559B9F73DC42745DAEBCCBBE7E6AE75D5EE71D8F34FF666"
+}

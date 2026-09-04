@@ -1,0 +1,10 @@
+{
+    "fixture":  "examples/vortex.png",
+    "captured":  "2026-09-03",
+    "renderer":  "legacy render_gif (pre-layout60)",
+    "trace_sha256":  "9E00FA881B234C9F5559B9F73DC42745DAEBCCBBE7E6AE75D5EE71D8F34FF666",
+    "program_sha256":  "2FA5405FBDAD407A4EE7A19584EC2B94B2B6EF2F1D0A713B437D333972797CE4",
+    "seed":  42,
+    "max_ticks":  500,
+    "debug_gif_sha256":  "120233A49165AACE531A49C094D43B81A676ADA7F0B187384728206E4B04A52D"
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "profile": "story",
+  "scale": 6,
+  "duration_ms": 85,
+  "max_frames": 120,
+  "interpolate": 5,
+  "persistence_frames": 10,
+  "trail_length": 12,
+  "entities": [
+    {"id": "core", "label": "Core", "pid": 0, "position": [0.5, 0.35]},
+    {"id": "orbit_a", "label": "Alpha", "pid": 1, "position": [0.25, 0.6]},
+    {"id": "orbit_b", "label": "Beta", "pid": 2, "position": [0.75, 0.6]}
+  ],
+  "event_styles": {
+    "PARTICLE_SPAWN": {"entity": "core", "emphasis": "pulse", "color": [120, 200, 255]},
+    "PARTICLE_DEATH": {"entity": "core", "emphasis": "cross", "color": [220, 60, 60]},
+    "INSTRUCTION_EXECUTED": {"entity": "core", "emphasis": "glow"}
+  },
+  "timing": {}
+}
