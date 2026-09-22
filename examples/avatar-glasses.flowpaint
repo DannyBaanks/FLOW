@@ -1,0 +1,20 @@
+# Gafas sobre un retrato 18x28 (filas de ojos en y=8..10, ver portraitArt).
+# Úsalo sobre una base: flow paint avatar-glasses.flowpaint --base jim.png -o jim-glasses.png
+CANVAS 18 28
+COLOR marco 60 54 62
+COLOR brillo 236 240 246
+# Montura izquierda (ojo en x=5-6, y=9).
+LINE 5 8 6 8 marco
+LINE 5 10 6 10 marco
+PIXEL 4 9 marco
+PIXEL 7 9 marco
+# Montura derecha (ojo en x=10-11, y=9).
+LINE 10 8 11 8 marco
+LINE 10 10 11 10 marco
+PIXEL 9 9 marco
+PIXEL 12 9 marco
+# Puente + brillos de cristal.
+PIXEL 8 8 marco
+PIXEL 4 8 brillo
+PIXEL 9 8 brillo
+SAVE avatar-glasses.png

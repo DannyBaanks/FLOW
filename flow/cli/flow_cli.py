@@ -122,6 +122,47 @@ def cmd_validate(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_paint(args: argparse.Namespace) -> int:
+    from flow.paint import run_paint_program  # lazy import
+    try:
+        source = Path(args.program).read_text(encoding='utf-8')
+    except OSError as e:
+        print(f"ERROR: no se lee {args.program}: {e}", file=sys.stderr)
+        return 1
+    base = None
+    if args.base:
+        try:
+            base = Path(args.base).read_bytes()
+        except OSError as e:
+            print(f"ERROR: no se lee base {args.base}: {e}", file=sys.stderr)
+            return 1
+    r = run_paint_program(source, base)
+    if not r.ok:
+        # DENY: falta del programa, nada a medias, nada escrito.
+        print(r.error, file=sys.stderr)
+        return 2
+    out = args.output or r.save_hint
+    if not out:
+        print("ERROR: sin SAVE en el programa y sin --output: nada que emitir", file=sys.stderr)
+        return 1
+    try:
+        Path(out).write_bytes(r.png_bytes or b'')
+    except OSError as e:
+        print(f"ERROR: no se escribe {out}: {e}", file=sys.stderr)
+        return 1
+    if args.trace_out:
+        try:
+            Path(args.trace_out).write_text(
+                json.dumps({'width': r.width, 'height': r.height, 'trace': r.trace},
+                           ensure_ascii=False, indent=2),
+                encoding='utf-8')
+        except OSError as e:
+            print(f"ERROR: no se escribe trace {args.trace_out}: {e}", file=sys.stderr)
+            return 1
+    print(f"PNG -> {out} ({r.width}x{r.height}, {len(r.trace)} trazos)")
+    return 0
+
+
 def cmd_render(args: argparse.Namespace) -> int:
     """Render image/GIF/session from a trace (M2+M3). Trace-only: never re-runs the VM.
 
@@ -212,6 +253,14 @@ def main() -> int:
     p_val = sub.add_parser("validate", help="Valida schema de trace.json")
     p_val.add_argument("trace")
     p_val.set_defaults(func=cmd_validate)
+
+    # paint (pincel determinista: programa texto -> PNG)
+    p_paint = sub.add_parser("paint", help="Ejecuta programa de pintado y emite PNG")
+    p_paint.add_argument("program", help="Archivo .flowpaint")
+    p_paint.add_argument("--base", default=None, help="PNG base sobre el que pintar (mismo tamaño que CANVAS)")
+    p_paint.add_argument("--output", "-o", default=None, help="PNG de salida (def: SAVE del programa o stdout negado)")
+    p_paint.add_argument("--trace-out", default=None, help="Guarda el trace de trazos en JSON")
+    p_paint.set_defaults(func=cmd_paint)
 
     # render (M2 + M3 multi-projection)
     from flow.render.spec import PROFILES
