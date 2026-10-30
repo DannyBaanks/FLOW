@@ -1,0 +1,137 @@
+'''FLOW''' is a two-dimensional [[esoteric programming language]] created by DannyBaanks in 2026, in which the program ''is an image'': a PNG file whose color channels encode a continuous vector field and an instruction map. Execution consists of particles that flow through the vector field, executing whatever instruction they find under their position. In the tradition of [[Piet]], the source code is a picture — but where a Piet program is executed by a pointer walking colored blocks, a FLOW program is executed by physics: the picture does not just contain the instructions, it contains the ''forces'' that move the machine.
+
+== Program format ==
+
+A FLOW program is an RGB image (PNG; any size). Each channel has a distinct semantic role:
+
+{| class="wikitable"
+! Channel !! Role
+|-
+| R || x-component of the vector field, encoded linearly: 0 &rarr; &minus;1.0, 128 &rarr; 0, 255 &rarr; +1.0
+|-
+| G || y-component of the vector field, same encoding
+|-
+| B || scalar layer: instruction codes (0–254) and spawn markers (255); mutable during execution
+|}
+
+Forces and instructions are independent per pixel, so a single pixel can simultaneously push particles and be executed by them.
+
+== Execution model ==
+
+Execution is carried out by '''particles'''. The machine spawns one particle at every pixel whose B value is 255 (the spawn marker). Each particle has a continuous position, a velocity, an 8-bit state register and a bounded stack (16 cells). One tick, for every live particle, is:
+
+# '''Read''': the B channel is sampled at the particle's position with bilinear interpolation; the rounded result (mod 256) is the instruction.
+# '''Execute''': the instruction runs (see table below). It may mutate the particle, the B layer, or spawn new particles.
+# '''Accelerate''': the vector field is sampled bilinearly at the particle's position and folded into its velocity (<code>v &larr; v &middot; damping + field &middot; gain</code>, with damping 0.9 and gain 0.1 by default).
+# '''Move''': the particle advances by <code>v &middot; dt</code>.
+# '''Bounds check''': a particle that leaves the image dies.
+
+The program ends when no particle remains alive (or when a configurable step budget, the ''fuel'', is spent). Because B is bilinearly interpolated at non-integer positions, gradients between instruction pixels are themselves meaningful territory: a particle crossing a boundary between two instructions can execute values that appear ''nowhere'' in the source image.
+
+== Instructions ==
+
+{| class="wikitable"
+! Code !! Name !! Effect
+|-
+| 0 || HALT || kill the particle
+|-
+| 1 || NOP || do nothing
+|-
+| 2 || INC || state &larr; state + 1 (mod 256)
+|-
+| 3 || DEC || state &larr; state &minus; 1 (mod 256)
+|-
+| 4 || READ || state &larr; current instruction code
+|-
+| 5 || WRITE || B[round(pos)] &larr; state
+|-
+| 6 || JMP+ || teleport 5 units along the velocity vector
+|-
+| 7 || JMP&minus; || teleport 5 units against the velocity vector
+|-
+| 8 || SPLIT || spawn a child particle 3 units perpendicular to the velocity, inheriting state and stack
+|-
+| 9 || TURN+ || rotate velocity by +45&deg;
+|-
+| 10 || TURN&minus; || rotate velocity by &minus;45&deg;
+|-
+| 11 || PUSH || push state onto the stack
+|-
+| 12 || POP || pop into state (0 if empty)
+|-
+| 13 || DUP || push state again
+|-
+| 14 || SWAP || exchange state with the top of the stack
+|-
+| 15 || ADD || pop two, push (a + b) mod 256
+|-
+| 16 || SUB || pop two, push (b &minus; a) mod 256
+|-
+| 17 || MUL || pop two, push (a &middot; b) mod 256
+|-
+| 18 || DIV || pop two, push b // a (0 on division by zero)
+|-
+| 19 || MOD || pop two, push b mod a (0 on division by zero)
+|-
+| 20 || EQ || pop two, push 1 if equal else 0
+|-
+| 21 || LT || pop two, push 1 if b &lt; a else 0
+|-
+| 22 || RAND || state &larr; random byte (seedable)
+|-
+| 23 || COLOR || B[round(pos)] &larr; B + state (mod 256) — recolors the pixel without overwriting it
+|-
+| 24 || TRACE || writes state into a separate trace layer (observability; the trace layer is never read back)
+|-
+| 25–254 || — || NOP
+|-
+| 255 || — || spawn marker at load time; NOP to execute
+|}
+
+WRITE and COLOR make FLOW programs '''self-modifying''': the image a particle navigates can be rewritten by earlier particles (or by the particle's own past trajectory), and a particle can lay instructions for its successors to find.
+
+== I/O ==
+
+FLOW has no conventional stdin/stdout. Its observable products are the final state of the mutable layers and the machine's own logs:
+
+* '''final B image''' — the mutated instruction layer, saved as a PNG;
+* '''trace image''' — the TRACE layer, also saved as a PNG;
+* '''execution log''' — a CSV of every (tick, particle, position, state, instruction) event.
+
+The reference implementation additionally separates ''execution'' from ''presentation'': a run produces a JSON execution trace, and any number of renderer profiles (debug, trails, heatmap, graph, orbit, cinematic, story) can turn that single trace into different GIF animations without re-running the program. Replay of a saved trace must reproduce the earlier run exactly.
+
+== Determinism ==
+
+With a fixed seed, the field encoding, the arithmetic and the RAND instruction are fully deterministic, and the implementation supports exact trace replay and trace diffing. Without a seed, RAND draws from OS entropy.
+
+== Examples ==
+
+Both example programs ship with the implementation and can be regenerated by the interpreter itself:
+
+* '''hello_flow.png''' (32&times;16): a straight rightward force corridor executes five INCs, a WRITE and a HALT — a single particle adjusts its state to 5 and stamps it back into the image.
+* '''vortex.png''' (64&times;64): a rotational vector field with eight spawn markers on a ring; particles orbit the center, splitting and tracing — the canonical demo of "the physics ''is'' the control flow".
+
+== Computational class ==
+
+Not established. The language has conditional arithmetic, a bounded stack, branching mediated by geometry (TURN/JMP steer by rotating or offsetting the velocity, so loops and conditionals are expressed as field topology rather than jumps to labels), self-modification, and unbounded particle multiplication via SPLIT; but any single run is confined to a finite image and, in practice, a finite fuel budget. No Turing-completeness claim is made.
+
+== Implementation ==
+
+The reference implementation (Python, NumPy + Pillow, no other dependencies) provides:
+
+* <code>flow run program.png --max-ticks N --seed S --trace out.json</code> — execute;
+* <code>flow replay</code> / <code>flow trace-diff</code> — deterministic replay and comparison;
+* <code>flow render</code> — render a saved trace to GIF under different visual profiles;
+* <code>--gen-hello</code> / <code>--gen-vortex</code> — generate the example programs.
+
+== External resources ==
+
+* [https://github.com/DannyBaanks/FLOW FLOW on GitHub] — reference implementation, specification, example programs and rendered animations. Dedicated to the public domain (CC0).
+
+[[Category:Languages]]
+[[Category:Two-dimensional languages]]
+[[Category:Stack-based]]
+[[Category:Self-modifying]]
+[[Category:2026]]
+[[Category:Implemented]]
+[[Category:Low-level]]
