@@ -115,6 +115,14 @@ flow.render    # M2: image/gif/session renderers
                    consume ExecutionTrace + RenderSpec → frames → GIF
 ```
 
+## Archivos añadidos al repositorio (2026-10-31)
+
+El commit `f14ce47` versiona dos archivos que estaban sin control de versiones:
+
+- `evidence/render-profiles/baseline_debug.gif` — perfil de render de referencia.
+- `wiki/FLOW.wiki` — volcado del wiki.
+
+
 ## License
 
 Dominio público / CC0.
